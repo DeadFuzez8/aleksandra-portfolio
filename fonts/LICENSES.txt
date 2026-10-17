@@ -1,0 +1,6 @@
+Шрифты, использованные на сайте (все распространяются по лицензии SIL Open Font License 1.1):
+- Instrument Serif (Rodrigo Fuenzalida, Jordan Egstad) — имя, цифры, акценты
+- Lora (Cyreal) — русские заголовки
+- IBM Plex Mono (IBM) — служебный текст и абзацы
+Файлы подмножены до латиницы и кириллицы и сохранены в формате WOFF.
+Тексты лицензий Lora и IBM Plex Mono лежат рядом (OFL-*.txt).
