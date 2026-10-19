@@ -11,6 +11,7 @@
   const stage = $('#heroStage');
   const hero = $('#top');
   let ticking = false;
+  let depthFn = null; // set by the smooth-scroll block below
 
   function onScroll() {
     const y = window.scrollY;
@@ -21,6 +22,7 @@
       stage.style.setProperty('--ny', (y * 0.2).toFixed(1) + 'px');
       stage.style.setProperty('--fy', (y * -0.05).toFixed(1) + 'px');
     }
+    if (depthFn) depthFn();
     ticking = false;
   }
   window.addEventListener('scroll', () => {
@@ -91,6 +93,8 @@
     review2:  { photos: [19],    title: 'Оригинал отзыва 02' },
     review3:  { photos: [20],    title: 'Оригинал отзыва 03' },
     review4:  { photos: [21],    title: 'Оригинал отзыва 04' },
+    review5:  { photos: [24],    title: 'Оригинал отзыва 05' },
+    review6:  { photos: [25],    title: 'Оригинал отзыва 06' },
     diploma1: { photos: [22],    title: 'Диплом SBA · профессиональная переподготовка' },
     diploma2: { photos: [23],    title: 'Удостоверение SBA · повышение квалификации' }
   };
@@ -170,4 +174,108 @@
     if (Math.abs(diff) > 60) shift(diff < 0 ? 1 : -1);
     touchX = null;
   }, { passive: true });
+  /* ---------- Smooth scroll (inertia) + soft depth ---------- */
+  // Wheel input on desktop is eased with a lerp; touch keeps the browser's native momentum.
+  // Images drift a few pixels inside their frames and headings lag the scroll slightly.
+  const motionOK = !reduceMotion.matches;
+  const depthItems = [];
+  const visible = new Set();
+  const compact = matchMedia('(max-width: 820px)');
+
+  if (motionOK) {
+    const add = (el, kind, range) => { if (el) { depthItems.push({ el, kind, range }); el.classList.add('has-depth'); } };
+    $$('.about__frame img, .year figure img, .photo-btn img').forEach(el => add(el, 'img', 0.035));
+    $$('main .display, main .lede').forEach(el => add(el, 'text', 16));
+    if ('IntersectionObserver' in window) {
+      const vis = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          const item = e.target.__depth;
+          if (e.isIntersecting) visible.add(item); else visible.delete(item);
+        }
+        depthTick();
+      }, { rootMargin: '15% 0px 15% 0px' });
+      depthItems.forEach(it => { it.el.__depth = it; vis.observe(it.el); });
+    } else {
+      depthItems.forEach(it => visible.add(it));
+    }
+  }
+
+  function depthTick() {
+    if (!visible.size) return;
+    const vh = window.innerHeight || 1;
+    const k = compact.matches ? 0.6 : 1;
+    const reads = [];
+    visible.forEach(it => {
+      const r = (it.kind === 'img' ? it.el.parentElement : it.el).getBoundingClientRect();
+      const p = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / vh));
+      reads.push([it, it.kind === 'img' ? p * r.height * it.range * k : p * it.range * k]);
+    });
+    for (const [it, y] of reads) it.el.style.translate = '0 ' + y.toFixed(2) + 'px';
+  }
+
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  if (motionOK && fine.matches) {
+    let target = window.scrollY, current = target, last = 0, running = false;
+    const maxScroll = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const frame = (t) => {
+      const dt = Math.min(48, t - (last || t - 16.7)); last = t;
+      const ease = 1 - Math.pow(1 - 0.085, dt / 16.7);
+      current += (target - current) * ease;
+      if (Math.abs(target - current) < 0.4) { current = target; running = false; last = 0; }
+      window.scrollTo({ top: current, behavior: 'instant' });
+      if (running) requestAnimationFrame(frame);
+    };
+    window.addEventListener('wheel', (e) => {
+      if (e.ctrlKey || e.defaultPrevented || document.body.classList.contains('modal-open')) return;
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1;
+      target = Math.max(0, Math.min(maxScroll(), target + e.deltaY * unit));
+      e.preventDefault();
+      if (!running) { running = true; requestAnimationFrame(frame); }
+    }, { passive: false });
+    // Anything else that moves the page (keys, scrollbar, anchors) takes over and resets the target.
+    window.addEventListener('scroll', () => {
+      if (Math.abs(window.scrollY - current) > 2) { target = current = window.scrollY; running = false; last = 0; }
+    }, { passive: true });
+  }
+  /* ---------- Transition phrase: scroll-bound words between the hero and the next section ---------- */
+  const phraseWords = [];
+  let phraseEl = null;
+  if (motionOK) {
+    phraseEl = document.createElement('div');
+    phraseEl.className = 'scroll-phrase';
+    phraseEl.setAttribute('aria-hidden', 'true');
+    phraseEl.hidden = true;
+    ['СИЛА', 'БЫТЬ', 'СОБОЙ'].forEach(w => {
+      const s = document.createElement('span');
+      s.textContent = w;
+      phraseEl.appendChild(s);
+      phraseWords.push(s);
+    });
+    document.body.appendChild(phraseEl);
+  }
+  function phraseTick() {
+    if (!phraseEl) return;
+    const vh = window.innerHeight || 1;
+    const start = vh * 0.08;
+    const end = Math.max(start + 300, hero.offsetHeight - vh * 0.1);
+    const p = (window.scrollY - start) / (end - start) * 1.1;
+    const n = phraseWords.length;
+    let any = false;
+    phraseWords.forEach((el, i) => {
+      const t = (p - (i + 0.5) / n) / (0.62 / n);          // -1 … 1 across this word's window
+      const o = Math.max(0, 1 - t * t);
+      if (o > 0.003) {
+        any = true;
+        el.style.opacity = o.toFixed(3);
+        el.style.transform = 'translate3d(0,' + (-t * 7).toFixed(2) + 'vh,0) scale(' + (0.8 + 0.34 * (t + 1) / 2).toFixed(3) + ')';
+        el.style.filter = o < 0.6 ? 'blur(' + ((1 - o / 0.6) * 6).toFixed(1) + 'px)' : 'none';
+      } else {
+        el.style.opacity = '0';
+      }
+    });
+    phraseEl.hidden = !any;
+  }
+  depthFn = () => { depthTick(); phraseTick(); };
+  depthFn();
 })();

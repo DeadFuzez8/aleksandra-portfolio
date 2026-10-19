@@ -20,11 +20,11 @@
 <!-- После публикации добавьте: <link rel="canonical" href="https://ВАШ-ДОМЕН/"> и <meta property="og:url" ...>, а в og:image укажите абсолютный URL. -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%236d1f26'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-size='44' text-anchor='middle' fill='%23f4ede3'%3EA%3C/text%3E%3C/svg%3E" />
 <link rel="preload" href="fonts/instrument-serif.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="photos/hero-cutout.webp" as="image" type="image/webp" fetchpriority="high" />
+<link rel="preload" href="photos/hero-arch.webp" as="image" type="image/webp" fetchpriority="high" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Alexandra","jobTitle":"Персональный фитнес-тренер","description":"Онлайн-тренировки и сопровождение по питанию","sameAs":["https://t.me/ukrainsskaya","https://www.instagram.com/ukrainsskaya/"]}</script>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="styles.css?v=3" />
-<script src="script.js?v=3" defer></script>
+<link rel="stylesheet" href="styles.css?v=12" />
+<script src="script.js?v=12" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Перейти к содержимому</a>
@@ -57,18 +57,19 @@
   <!-- HERO -->
   <section class="hero" id="top" aria-label="Главный экран">
     <div class="hero__stage" id="heroStage">
-      <div class="hero__arch" aria-hidden="true"></div>
-      <h1 class="hero__name" id="heroName" aria-label="Alexandra">
-        <span aria-hidden="true" class="hero__letters"><span style="--i:0">A</span><span style="--i:1">l</span><span style="--i:2">e</span><span style="--i:3">x</span><span style="--i:4">a</span><span style="--i:5">n</span><span style="--i:6">d</span><span style="--i:7">r</span><span style="--i:8">a</span></span>
+      <h1 class="hero__name" id="heroName" aria-label="Alexandra Ukrainskaya">
+        <span aria-hidden="true" class="hero__letters"><span class="hero__line"><span style="--i:0">A</span><span style="--i:1">l</span><span style="--i:2">e</span><span style="--i:3">x</span><span style="--i:4">a</span><span style="--i:5">n</span><span style="--i:6">d</span><span style="--i:7">r</span><span style="--i:8">a</span></span></span>
+        <span aria-hidden="true" class="hero__letters"><span class="hero__line"><span style="--i:4">U</span><span style="--i:5">k</span><span style="--i:6">r</span><span style="--i:7">a</span><span style="--i:8">i</span><span style="--i:9">n</span><span style="--i:10">s</span><span style="--i:11">k</span><span style="--i:12">a</span><span style="--i:13">y</span><span style="--i:14">a</span></span></span>
       </h1>
-      <img class="hero__figure" id="heroFigure" src="photos/hero-cutout.webp" width="960" height="1442" alt="Alexandra — персональный фитнес-тренер" fetchpriority="high" decoding="async" />
+      <p class="hero__role rise" style="--d:1.05s">ONLINE<br/> FITNESS COACH</p>
+      <img class="hero__figure" id="heroFigure" src="photos/hero-arch.webp" width="1100" height="1650" alt="Alexandra — персональный фитнес-тренер" fetchpriority="high" decoding="async" />
     </div>
 
     <p class="hero__note hero__note--left rise" style="--d:.9s">Персональный<br/>фитнес-тренер<br/>онлайн</p>
     <p class="hero__note hero__note--right rise" style="--d:1s">Тренировки<br/>и питание —<br/>индивидуально</p>
 
-    <svg class="hero__doodle hero__doodle--left rise" style="--d:1.15s" viewBox="0 0 90 60" aria-hidden="true" focusable="false"><path d="M4 8c26-8 52-2 60 20 5 14-6 24-20 20-12-3-10-18 2-18 12 0 18 12 14 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M62 44l-1 12 11-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <svg class="hero__doodle hero__doodle--right rise" style="--d:1.25s" viewBox="0 0 90 60" aria-hidden="true" focusable="false"><path d="M86 8C60 0 34 6 26 28c-5 14 6 24 20 20 12-3 10-18-2-18-12 0-18 12-14 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M28 44l1 12-11-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="hero__doodle hero__doodle--left rise" style="--d:1.15s" viewBox="0 0 90 60" aria-hidden="true" focusable="false"><path d="M8 10C38 2 72 12 72 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M64.5 32.5 72 41l7.5-8.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="hero__doodle hero__doodle--right rise" style="--d:1.25s" viewBox="0 0 90 60" aria-hidden="true" focusable="false"><path d="M82 10C52 2 18 12 18 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M25.5 32.5 18 41l-7.5-8.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 
     <div class="hero__foot">
       <div class="hero__stat rise" style="--d:1.1s"><strong>3+</strong><span>года практики<br/>в персональных<br/>тренировках</span></div>
@@ -84,11 +85,11 @@
     <div class="section__head reveal"><span class="label">01 — Знакомство</span><span class="label label--muted">About me</span></div>
     <div class="about__grid">
       <figure class="about__photo reveal">
-        <div class="about__frame"><img src="photos/image1.webp" width="1024" height="1536" alt="Портрет Alexandra" loading="lazy" decoding="async" /></div>
+        <div class="about__frame"><img src="photos/about.webp" width="862" height="1536" alt="Портрет Alexandra" loading="lazy" decoding="async" /></div>
         <figcaption>Не просто тренировки.<br/>Новый взгляд на себя.</figcaption>
       </figure>
       <div class="about__text">
-        <p class="hello reveal">Привет, я Alexandra</p>
+        <p class="hello reveal">Привет, я Александра</p>
         <h2 class="display reveal">Любовь к <em>себе</em> — в движении.</h2>
         <div class="about__copy reveal">
           <p>Я Александра — персональный фитнес-тренер с опытом работы более 3 лет.</p>
@@ -107,7 +108,7 @@
 
   <!-- MARQUEE -->
   <div class="marquee" aria-hidden="true">
-    <div class="marquee__track"><span>Strong is beautiful</span><i>✳</i><span><em>Strong</em> is beautiful</span><i>✳</i><span>Strong is beautiful</span><i>✳</i><span><em>Strong</em> is beautiful</span><i>✳</i></div>
+    <div class="marquee__track"><span>Strong is beautiful</span><i>✳︎</i><span><em>Strong</em> is beautiful</span><i>✳︎</i><span>Strong is beautiful</span><i>✳︎</i><span><em>Strong</em> is beautiful</span><i>✳︎</i></div>
   </div>
 
   <!-- JOURNEY -->
@@ -206,6 +207,8 @@
       <button class="quote reveal" data-gallery="review2" aria-label="Открыть оригинал отзыва 02"><span class="label">02 — Отзыв</span><blockquote>«Спасибо тебе за твой подход, за поддержку и за то, что с тобой было так легко и комфортно!»</blockquote><span class="quote__more">Читать полностью <i aria-hidden="true">↗</i></span></button>
       <button class="quote reveal" data-gallery="review3" aria-label="Открыть оригинал отзыва 03"><span class="label">03 — Отзыв</span><blockquote>«Благодаря тебе это был мягкий путь, без жестких срывов.»</blockquote><span class="quote__more">Читать полностью <i aria-hidden="true">↗</i></span></button>
       <button class="quote reveal" data-gallery="review4" aria-label="Открыть оригинал отзыва 04"><span class="label">04 — Отзыв</span><blockquote>«Благодаря тебе я полюбила зал и ходила туда с большим рвением»</blockquote><span class="quote__more">Читать полностью <i aria-hidden="true">↗</i></span></button>
+      <button class="quote reveal" data-gallery="review5" aria-label="Открыть оригинал отзыва 05"><span class="label">05 — Отзыв</span><blockquote>«Даже когда было очень тяжело, ты всегда поддерживала, как личный психолог в лице тренера.»</blockquote><span class="quote__more">Читать полностью <i aria-hidden="true">↗</i></span></button>
+      <button class="quote reveal" data-gallery="review6" aria-label="Открыть оригинал отзыва 06"><span class="label">06 — Отзыв</span><blockquote>«Получаю удовольствие не только от результата, но и от самого процесса.»</blockquote><span class="quote__more">Читать полностью <i aria-hidden="true">↗</i></span></button>
     </div>
     <p class="quotes__outro reveal">И ещё десятки девушек, которые доверили мне свои тренировки и путь к изменениям 🤍</p>
   </section>
