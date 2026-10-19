@@ -238,44 +238,6 @@
       if (Math.abs(window.scrollY - current) > 2) { target = current = window.scrollY; running = false; last = 0; }
     }, { passive: true });
   }
-  /* ---------- Transition phrase: scroll-bound words between the hero and the next section ---------- */
-  const phraseWords = [];
-  let phraseEl = null;
-  if (motionOK) {
-    phraseEl = document.createElement('div');
-    phraseEl.className = 'scroll-phrase';
-    phraseEl.setAttribute('aria-hidden', 'true');
-    phraseEl.hidden = true;
-    ['СИЛА', 'БЫТЬ', 'СОБОЙ'].forEach(w => {
-      const s = document.createElement('span');
-      s.textContent = w;
-      phraseEl.appendChild(s);
-      phraseWords.push(s);
-    });
-    document.body.appendChild(phraseEl);
-  }
-  function phraseTick() {
-    if (!phraseEl) return;
-    const vh = window.innerHeight || 1;
-    const start = vh * 0.08;
-    const end = Math.max(start + 300, hero.offsetHeight - vh * 0.1);
-    const p = (window.scrollY - start) / (end - start) * 1.1;
-    const n = phraseWords.length;
-    let any = false;
-    phraseWords.forEach((el, i) => {
-      const t = (p - (i + 0.5) / n) / (0.62 / n);          // -1 … 1 across this word's window
-      const o = Math.max(0, 1 - t * t);
-      if (o > 0.003) {
-        any = true;
-        el.style.opacity = o.toFixed(3);
-        el.style.transform = 'translate3d(0,' + (-t * 7).toFixed(2) + 'vh,0) scale(' + (0.8 + 0.34 * (t + 1) / 2).toFixed(3) + ')';
-        el.style.filter = o < 0.6 ? 'blur(' + ((1 - o / 0.6) * 6).toFixed(1) + 'px)' : 'none';
-      } else {
-        el.style.opacity = '0';
-      }
-    });
-    phraseEl.hidden = !any;
-  }
-  depthFn = () => { depthTick(); phraseTick(); };
+  depthFn = depthTick;
   depthFn();
 })();
