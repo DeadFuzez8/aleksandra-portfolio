@@ -119,7 +119,7 @@ main:focus{outline:0}
 .hero__letters:first-child{font-size:1.2em}
 .hero__letters:nth-child(2){font-size:.62em}
 .hero__role{position:absolute;z-index:3;left:calc(50% + var(--nfs) * 1.25 + 22px);top:calc(var(--name-top) + var(--nfs) * 1.52);translate:0 -100%;margin:0;white-space:nowrap;text-align:left;font:500 clamp(13px,1.15vw,16px)/1.7 var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--wine)}
-.hero__figure{position:absolute;z-index:2;left:0;right:0;margin-inline:auto;bottom:0;width:calc(var(--fig-h) * .74);height:calc(var(--fig-h) * 1.06);object-fit:cover;object-position:50% 12%;border-radius:999px 999px 0 0;max-width:none;translate:0 var(--fy,0px)}
+.hero__figure{position:absolute;z-index:2;left:0;right:0;margin-inline:auto;bottom:0;width:calc(var(--fig-h) * .74);height:calc(var(--fig-h) * 1.06);object-fit:cover;object-position:50% 12%;border-radius:999px 999px 0 0;max-width:none;translate:0 var(--fy,0px);background:linear-gradient(105deg,#b9b4ae 0%,#cfccc7 55%,#dcdad6 100%)}
 .hero__note{position:absolute;z-index:3;top:52%;font:500 14px/1.7 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
 .hero__note--left{left:var(--gutter)}
 .hero__note--right{right:var(--gutter);text-align:right}
